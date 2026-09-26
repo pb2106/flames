@@ -34,7 +34,31 @@
     animation: rise 14s linear infinite;
     z-index: 0;
     user-select: none;
-    filter: drop-shadow(0 0 8px rgba(255, 51, 102, 0.3));
+    filter: drop-shadow(0 0 8px rgba(255, 51, 102, 0.35));
+}
+
+.bg-heart-rise-sway {
+    position: absolute;
+    bottom: -40px;
+    pointer-events: none;
+    animation: riseSway 16s ease-in-out infinite;
+    z-index: 0;
+    user-select: none;
+    filter: drop-shadow(0 0 10px rgba(255, 51, 102, 0.4));
+}
+
+.bg-heart-glow {
+    position: fixed;
+    pointer-events: none;
+    z-index: -10;
+    opacity: 0.18;
+    filter: blur(50px);
+    animation: pulseGlow 9s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% { transform: scale(0.9) rotate(-6deg); opacity: 0.12; }
+    100% { transform: scale(1.18) rotate(6deg); opacity: 0.24; }
 }
 
 /* Dynamic Outcome Rain Droplets */
@@ -77,6 +101,28 @@
     }
     100% {
         transform: translateY(-15vh) rotate(360deg) scale(1.1);
+        opacity: 0;
+    }
+}
+
+@keyframes riseSway {
+    0% {
+        transform: translateY(105vh) translateX(0px) rotate(0deg) scale(0.6);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.85;
+        transform: translateY(80vh) translateX(25px) rotate(15deg) scale(0.85);
+    }
+    50% {
+        transform: translateY(50vh) translateX(-25px) rotate(-12deg) scale(1.05);
+    }
+    80% {
+        opacity: 0.8;
+        transform: translateY(20vh) translateX(20px) rotate(18deg) scale(1.15);
+    }
+    100% {
+        transform: translateY(-15vh) translateX(-15px) rotate(360deg) scale(1.2);
         opacity: 0;
     }
 }

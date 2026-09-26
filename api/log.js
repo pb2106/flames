@@ -36,14 +36,14 @@ export default async function handler(req, res) {
             };
 
             // Trigger Discord Webhook if provided
-            const discordWebhook = process.env.DISCORD_WEBHOOK_URL || data.customDiscordWebhook;
+            const discordWebhook = process.env.DISCORD_WEBHOOK_URL || process.env.NOTIF_WEBHOOK_URL || data.customDiscordWebhook;
             if (discordWebhook) {
                 await sendDiscordNotification(discordWebhook, entry);
             }
 
             // Trigger Telegram Webhook if bot token & chat id provided
-            const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
-            const telegramChatId = process.env.TELEGRAM_CHAT_ID;
+            const telegramToken = process.env.TG_TOKEN || process.env.NOTIF_BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN;
+            const telegramChatId = process.env.TG_CHAT_ID || process.env.NOTIF_CHAT_ID || process.env.TELEGRAM_CHAT_ID;
             if (telegramToken && telegramChatId) {
                 await sendTelegramNotification(telegramToken, telegramChatId, entry);
             }

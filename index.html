@@ -79,12 +79,38 @@
     
     <!-- AMBIENT BACKGROUND HEARTS LAYER -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10" id="heartsBackground">
-        <span class="bg-heart-rise text-2xl text-primary/40" style="left: 12%; animation-duration: 13s; animation-delay: 1s;">💕</span>
-        <span class="bg-heart-rise text-3xl text-secondary/35" style="left: 27%; animation-duration: 16s; animation-delay: 4s;">✨</span>
-        <span class="bg-heart-rise text-4xl text-primary/45" style="left: 42%; animation-duration: 11.5s; animation-delay: 0.5s;">💖</span>
-        <span class="bg-heart-rise text-2xl text-tertiary/40" style="left: 58%; animation-duration: 14.5s; animation-delay: 3.5s;">🌸</span>
-        <span class="bg-heart-rise text-3xl text-primary/50" style="left: 73%; animation-duration: 12.5s; animation-delay: 2s;">💘</span>
-        <span class="bg-heart-rise text-xl text-rose-500/40" style="left: 86%; animation-duration: 15s; animation-delay: 4.5s;">💌</span>
+        <!-- Glowing Soft Background Ambient Orbs -->
+        <div class="bg-heart-glow w-96 h-96 bg-primary/30 rounded-full top-10 -left-20"></div>
+        <div class="bg-heart-glow w-[30rem] h-[30rem] bg-rose-400/25 rounded-full top-1/3 -right-28" style="animation-delay: -3s;"></div>
+        <div class="bg-heart-glow w-[28rem] h-[28rem] bg-secondary/20 rounded-full bottom-10 left-1/4" style="animation-delay: -5s;"></div>
+
+        <!-- Ambient SVG Heart Watermarks in Background -->
+        <svg class="fixed top-12 left-8 w-48 h-48 text-primary/10 -z-10 animate-float opacity-70" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        <svg class="fixed top-1/2 right-12 w-64 h-64 text-secondary/10 -z-10 animate-float opacity-60" style="animation-delay: -2s;" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+
+        <!-- Continuous Floating Rising Hearts -->
+        <span class="bg-heart-rise text-2xl text-primary/50" style="left: 6%; animation-duration: 11s; animation-delay: 0s;">💖</span>
+        <span class="bg-heart-rise-sway text-3xl text-rose-500/40" style="left: 14%; animation-duration: 14s; animation-delay: 2s;">💕</span>
+        <span class="bg-heart-rise text-xl text-secondary/45" style="left: 22%; animation-duration: 16s; animation-delay: 5s;">💗</span>
+        <span class="bg-heart-rise-sway text-4xl text-primary/60" style="left: 31%; animation-duration: 12.5s; animation-delay: 1s;">💘</span>
+        <span class="bg-heart-rise text-2xl text-rose-400/50" style="left: 39%; animation-duration: 15s; animation-delay: 4s;">❤️</span>
+        <span class="bg-heart-rise-sway text-3xl text-tertiary/50" style="left: 48%; animation-duration: 13s; animation-delay: 0.5s;">💓</span>
+        <span class="bg-heart-rise text-5xl text-primary/35" style="left: 56%; animation-duration: 18s; animation-delay: 3s;">💖</span>
+        <span class="bg-heart-rise-sway text-2xl text-rose-500/55" style="left: 64%; animation-duration: 10.5s; animation-delay: 6s;">❣️</span>
+        <span class="bg-heart-rise text-4xl text-secondary/40" style="left: 73%; animation-duration: 15s; animation-delay: 1.5s;">💞</span>
+        <span class="bg-heart-rise-sway text-2xl text-primary/60" style="left: 81%; animation-duration: 12s; animation-delay: 3.5s;">💘</span>
+        <span class="bg-heart-rise text-3xl text-rose-400/45" style="left: 89%; animation-duration: 17s; animation-delay: 0.8s;">💕</span>
+        <span class="bg-heart-rise-sway text-xl text-tertiary/55" style="left: 95%; animation-duration: 13.5s; animation-delay: 4.5s;">💗</span>
+
+        <!-- Secondary Depth Layer (Slower & Higher Opacity) -->
+        <span class="bg-heart-rise text-3xl text-primary/45" style="left: 10%; animation-duration: 20s; animation-delay: 8s;">❤️</span>
+        <span class="bg-heart-rise-sway text-2xl text-rose-500/50" style="left: 28%; animation-duration: 19s; animation-delay: 9s;">💖</span>
+        <span class="bg-heart-rise text-4xl text-secondary/35" style="left: 52%; animation-duration: 21s; animation-delay: 7s;">💕</span>
+        <span class="bg-heart-rise-sway text-3xl text-primary/50" style="left: 78%; animation-duration: 18.5s; animation-delay: 10s;">💘</span>
     </div>
 
     <!-- Header -->
@@ -340,21 +366,6 @@
             </div>
         </div>
 
-        <!-- Mini Live Activity Ticker -->
-        <div class="bg-white/85 backdrop-blur-md rounded-full px-6 py-3.5 border border-pink-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-            <div class="flex items-center gap-2 font-bold text-primary shrink-0">
-                <span class="w-2.5 h-2.5 rounded-full bg-primary animate-ping"></span>
-                <span class="uppercase tracking-wider">Cupid’s Live Wire:</span>
-            </div>
-            <div class="overflow-hidden w-full">
-                <div class="flex items-center gap-6 animate-pulse text-on-surface-variant font-medium whitespace-nowrap overflow-x-auto" id="liveTicker">
-                    <span>💖 Liam + Emma matched: <strong class="text-primary">Lovers (95%)</strong></span>
-                    <span>•</span>
-                    <span>💍 Noah + Olivia matched: <strong class="text-secondary">Marriage (99%)</strong></span>
-                    <span>•</span>
-                    <span>🌹 Sophia tested a crush 2m ago</span>
-                </div>
-            </div>
         </div>
     </main>
 
@@ -598,7 +609,7 @@
             return active ? active.textContent : '🔥 Head Over Heels';
         }
 
-        window.calculateValentineFlames = function () {
+        window.calculateValentineFlames = async function () {
             const n1 = document.getElementById('name1').value.trim();
             const n2 = document.getElementById('name2').value.trim();
             if (!n1 || !n2) {
@@ -606,7 +617,36 @@
                 return;
             }
 
+            const btn = document.getElementById('calculateBtn');
+            if (btn && btn.disabled) return;
+
+            const originalBtnHTML = btn ? btn.innerHTML : '';
+            if (btn) {
+                btn.disabled = true;
+                btn.classList.add('opacity-90', 'cursor-wait');
+                btn.innerHTML = `
+                    <span class="animate-spin text-2xl">💖</span>
+                    <span class="animate-pulse">Consulting Cupid's Stars...</span>
+                    <span class="material-symbols-outlined text-2xl animate-bounce" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                `;
+            }
+
             sfx.playLoveChime();
+            showToast("✨ Aligning cosmic heartbeats...", "🔮");
+
+            const card = document.getElementById('resultCard');
+            if (card && !card.classList.contains('hidden')) {
+                card.classList.add('hidden');
+            }
+
+            // 2 Second Romantic Loading Delay
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            if (btn) {
+                btn.disabled = false;
+                btn.classList.remove('opacity-90', 'cursor-wait');
+                btn.innerHTML = originalBtnHTML;
+            }
 
             const verdict = computeAuthenticFlames(n1, n2);
             const aura = getSelectedAura();
@@ -638,13 +678,13 @@
                 tagContainer.innerHTML = verdict.tags.map(t => `<span class="px-3.5 py-1 rounded-full text-xs font-extrabold bg-white text-primary border border-pink-200 shadow-xs">${t}</span>`).join('');
             }
 
-            const card = document.getElementById('resultCard');
             if (card) {
                 card.classList.remove('hidden');
                 card.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
 
             showToast(`✨ Cupid's Verdict: ${verdict.name.split(' ')[0]}!`, '💘');
+            sfx.playLoveChime();
 
             notifyCrushSubmission(n1, n2, verdict.letter, verdict.name.split(' ')[0], verdict.pct, aura, status);
         };
@@ -664,13 +704,6 @@
                 timestamp: new Date().toISOString()
             };
 
-            const ticker = document.getElementById('liveTicker');
-            if (ticker) {
-                const item = document.createElement('span');
-                item.innerHTML = `💘 <strong>${n1} + ${n2}</strong> matched: <strong class="text-primary">${name} (${pct})</strong>`;
-                ticker.prepend(item);
-            }
-
             fetch('/api/log', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -688,8 +721,11 @@
             const n1 = document.getElementById('name1').value.trim() || 'Sweetheart';
             let n2 = document.getElementById('name2').value.trim() || 'Crush';
             const isCensored = document.getElementById('censorCrushCheck').checked;
-            if (isCensored) {
-                n2 = '🔒 [SECRET CRUSH]';
+            if (isCensored && n2) {
+                const cleanN2 = n2.trim();
+                const firstChar = cleanN2.charAt(0);
+                const lastChar = cleanN2.length > 1 ? cleanN2.charAt(cleanN2.length - 1) : '';
+                n2 = firstChar + '******' + lastChar;
             }
 
             // Get current calculation details
