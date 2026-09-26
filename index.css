@@ -10,8 +10,71 @@
     body {
         overscroll-behavior: none;
         background: linear-gradient(135deg, #fff2f7 0%, #ffe8f2 35%, #ffdbe8 70%, #fff0f6 100%);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 }
+
+/* =========================================================
+   Mobile & iOS-Specific Fixes
+   ========================================================= */
+
+/* Remove blue tap highlight on mobile buttons */
+button, a, input, label {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+/* Prevent input zoom on iOS (font-size must be >= 16px on focus) */
+input[type="text"] {
+    font-size: 16px !important;
+    -webkit-appearance: none;
+    border-radius: 9999px;
+}
+
+/* Full-width inputs on small screens, less padding */
+@media (max-width: 640px) {
+    .outcome-rain-item {
+        font-size: 20px !important;
+    }
+
+    /* Reduce ambient heart size on mobile for perf */
+    .bg-heart-rise,
+    .bg-heart-rise-sway {
+        filter: drop-shadow(0 0 4px rgba(255, 51, 102, 0.25));
+    }
+
+    /* Tighten pill gap on mobile */
+    #auraPills, #crushStatusPills {
+        gap: 6px;
+    }
+}
+
+/* Respect user's reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .bg-heart-rise,
+    .bg-heart-rise-sway,
+    .outcome-rain-item,
+    .confetti-piece {
+        animation: none !important;
+        opacity: 0.3;
+    }
+    .animate-float,
+    .animate-heartPulse,
+    .animate-bounce,
+    .animate-ping,
+    .animate-spin {
+        animation: none !important;
+    }
+}
+
+/* Safe area insets for iPhone notch / Dynamic Island */
+@supports (padding-top: env(safe-area-inset-top)) {
+    .safe-area-header {
+        padding-top: env(safe-area-inset-top);
+    }
+}
+
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {

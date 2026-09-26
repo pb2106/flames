@@ -3,7 +3,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#ff3366">
     <title>FLAMES Crush Lab — Valentine Edition 💘</title>
     <meta name="description" content="Test your name chemistry with your crush on FLAMES! Get your cosmic percentage, romantic fortune, and secret Valentine verdict.">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;display=swap" rel="stylesheet">
@@ -114,78 +118,79 @@
     </div>
 
     <!-- Header -->
-    <header class="fixed top-0 w-full z-50 bg-white/85 backdrop-blur-2xl border-b border-primary/15 shadow-[0_4px_30px_rgba(255,51,102,0.12)]">
-        <div class="h-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3 shrink-0">
+    <header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-2xl border-b border-primary/15 shadow-[0_4px_30px_rgba(255,51,102,0.12)]" style="padding-top: env(safe-area-inset-top);">
+        <div class="h-16 sm:h-20 max-w-7xl mx-auto px-3 sm:px-6 lg:px-12 flex items-center justify-between gap-2 sm:gap-4">
+            <!-- Logo -->
+            <div class="flex items-center gap-2 sm:gap-3 shrink-0">
                 <div class="relative group cursor-pointer" onclick="triggerMagicPulse()">
-                    <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-primary via-rose-500 to-secondary flex items-center justify-center text-white text-2xl shadow-[0_4px_16px_rgba(255,51,102,0.4)] group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300">
+                    <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-tr from-primary via-rose-500 to-secondary flex items-center justify-center text-white text-xl sm:text-2xl shadow-[0_4px_16px_rgba(255,51,102,0.4)] group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300">
                         💘
                     </div>
                 </div>
-                <a class="flex items-center gap-2 font-headline font-black text-xl tracking-tight text-primary hover:opacity-90 transition-opacity" href="#">
-                    <span class="bg-gradient-to-r from-primary via-rose-500 to-secondary bg-clip-text text-transparent drop-shadow-xs">FLAMES</span>
-                    <span class="text-xs px-2.5 py-0.5 rounded-full bg-gradient-to-r from-primary via-rose-500 to-tertiary text-white font-extrabold shadow-md uppercase tracking-wide">Valentine Edition 💘</span>
+                <a class="flex items-center gap-1.5 sm:gap-2 font-headline font-black tracking-tight text-primary hover:opacity-90 transition-opacity" href="#">
+                    <span class="bg-gradient-to-r from-primary via-rose-500 to-secondary bg-clip-text text-transparent drop-shadow-xs text-lg sm:text-xl">FLAMES</span>
+                    <span class="hidden xs:inline-flex text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-gradient-to-r from-primary via-rose-500 to-tertiary text-white font-extrabold shadow-md uppercase tracking-wide whitespace-nowrap">Valentine 💘</span>
                 </a>
             </div>
 
-            <!-- Navigation -->
-            <nav class="hidden md:flex items-center gap-2 p-1.5 rounded-full bg-surface-container/80 border border-primary/20 backdrop-blur-md shadow-inner">
-                <a class="px-5 py-2 rounded-full transition-all bg-gradient-to-r from-primary to-rose-500 text-white font-bold text-sm shadow-[0_4px_18px_rgba(255,51,102,0.4)] flex items-center gap-1.5 hover:scale-102" href="#">
+            <!-- Navigation — desktop only -->
+            <nav class="hidden lg:flex items-center gap-2 p-1.5 rounded-full bg-surface-container/80 border border-primary/20 backdrop-blur-md shadow-inner">
+                <a class="px-5 py-2 rounded-full transition-all bg-gradient-to-r from-primary to-rose-500 text-white font-bold text-sm shadow-[0_4px_18px_rgba(255,51,102,0.4)] flex items-center gap-1.5" href="#">
                     <span>💘 Cupid Matcher</span>
                 </a>
                 <a class="px-4 py-2 rounded-full text-sm font-semibold text-on-surface-variant hover:text-primary hover:bg-white/90 transition-all flex items-center gap-1" href="#resultCard" onclick="document.getElementById('resultCard').scrollIntoView({behavior:'smooth'});">
-                    <span>💌 Instant Result</span>
+                    <span>💌 Result</span>
                 </a>
             </nav>
 
             <!-- Music & Mood Actions -->
-            <div class="flex items-center gap-3">
-                <button class="relative px-4 py-2 rounded-full bg-gradient-to-r from-pink-100 via-rose-100 to-pink-50 hover:from-pink-200 hover:to-rose-100 border border-primary/30 text-on-surface font-extrabold text-xs flex items-center gap-2 shadow-sm transition-all active:scale-95 hover:shadow-md" onclick="toggleRomanticMusic()">
-                    <span class="material-symbols-outlined text-primary text-base" id="musicIcon">music_note</span>
-                    <span id="musicStatusText">Valentine Vibes</span>
-                    <span class="w-2.5 h-2.5 rounded-full bg-primary animate-ping"></span>
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Music toggle: icon-only on mobile, labeled on sm+ -->
+                <button class="relative flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 rounded-full bg-gradient-to-r from-pink-100 via-rose-100 to-pink-50 hover:from-pink-200 hover:to-rose-100 border border-primary/30 text-on-surface font-extrabold text-xs shadow-sm transition-all active:scale-95 hover:shadow-md" onclick="toggleRomanticMusic()">
+                    <span class="material-symbols-outlined text-primary text-base leading-none" id="musicIcon">music_note</span>
+                    <span class="hidden sm:inline" id="musicStatusText">Love Melody 🎵</span>
+                    <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-primary animate-ping" id="musicPing"></span>
                 </button>
-                <button class="w-10 h-10 rounded-full bg-gradient-to-tr from-primary via-rose-500 to-tertiary flex items-center justify-center text-white shadow-[0_4px_16px_rgba(255,51,102,0.4)] hover:scale-110 active:scale-95 transition-transform" onclick="triggerMagicPulse()" title="Send Cupid Pulse">
-                    <span class="material-symbols-outlined text-xl">volunteer_activism</span>
+                <button class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-primary via-rose-500 to-tertiary flex items-center justify-center text-white shadow-[0_4px_16px_rgba(255,51,102,0.4)] hover:scale-110 active:scale-95 transition-transform" onclick="triggerMagicPulse()" title="Heartbeat">
+                    <span class="material-symbols-outlined text-lg sm:text-xl">volunteer_activism</span>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- Main Hero & Valentine Calculator -->
-    <main class="w-full pt-28 pb-16 px-4 sm:px-6 lg:px-8 relative z-10 max-w-6xl mx-auto">
-        <!-- Hero Title -->
-        <div class="text-center max-w-3xl mx-auto mb-10 relative">
-            <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/90 border border-primary/25 text-primary text-xs sm:text-sm font-extrabold tracking-wide shadow-[0_8px_25px_rgba(255,51,102,0.18)] mb-6 animate-float">
-                <span class="text-base">🏹</span>
-                <span class="tracking-wider uppercase bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Cupid’s Official FLAMES Matcher</span>
-                <span class="text-base">✨</span>
+    <main class="w-full pt-20 sm:pt-28 pb-16 px-3 sm:px-6 lg:px-8 relative z-10 max-w-6xl mx-auto" style="padding-bottom: calc(4rem + env(safe-area-inset-bottom));">
+        <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-10 relative">
+            <div class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-1.5 sm:py-2 rounded-full bg-white/90 border border-primary/25 text-primary text-[10px] sm:text-sm font-extrabold tracking-wide shadow-[0_8px_25px_rgba(255,51,102,0.18)] mb-4 sm:mb-6 animate-float">
+                <span class="text-sm sm:text-base">🏹</span>
+                <span class="tracking-wider uppercase bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Cupid's Official FLAMES Matcher</span>
+                <span class="text-sm sm:text-base">✨</span>
             </div>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-headline font-black text-on-surface tracking-tight leading-[1.12]">
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-headline font-black text-on-surface tracking-tight leading-[1.12] px-2">
                 <span class="bg-gradient-to-r from-primary via-rose-500 to-secondary bg-clip-text text-transparent drop-shadow-md">Check Your FLAMES Destiny 💕</span>
             </h1>
-            <p class="mt-4 text-base sm:text-lg text-on-surface-variant font-medium max-w-xl mx-auto leading-relaxed">
+            <p class="mt-3 sm:mt-4 text-sm sm:text-lg text-on-surface-variant font-medium max-w-xl mx-auto leading-relaxed px-2">
                 Type your name &amp; your secret crush to unveil Cupid's celestial verdict. Will Valentine's Day bring sweet <span class="text-primary font-bold">Affection</span> or eternal <span class="text-primary font-bold">Lovers</span>?
             </p>
         </div>
 
         <!-- MAIN PAIRING CARD -->
-        <div class="relative p-[3px] rounded-[2.6rem] love-card-border shadow-[0_30px_70px_rgba(255,51,102,0.22)] mb-14 transition-all">
-            <div class="bg-white/95 backdrop-blur-2xl rounded-[2.5rem] p-6 sm:p-10 relative overflow-hidden">
+        <div class="relative p-[2px] sm:p-[3px] rounded-[1.8rem] sm:rounded-[2.6rem] love-card-border shadow-[0_20px_50px_rgba(255,51,102,0.2)] sm:shadow-[0_30px_70px_rgba(255,51,102,0.22)] mb-8 sm:mb-14 transition-all">
+            <div class="bg-white/95 backdrop-blur-2xl rounded-[1.7rem] sm:rounded-[2.5rem] p-4 sm:p-10 relative overflow-hidden">
                 <div class="absolute -top-28 -left-28 w-72 h-72 bg-gradient-to-br from-pink-300/40 to-purple-300/30 rounded-full blur-3xl pointer-events-none"></div>
                 <div class="absolute -bottom-28 -right-28 w-72 h-72 bg-gradient-to-tl from-rose-300/40 to-pink-300/30 rounded-full blur-3xl pointer-events-none"></div>
 
                 <form id="flamesValentineForm" onsubmit="event.preventDefault(); window.calculateValentineFlames();">
-                    <div class="grid grid-cols-1 lg:grid-cols-11 gap-6 items-center relative z-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-11 gap-4 sm:gap-6 items-center relative z-10">
                         
                         <!-- Player 1 Card (Inputs cleaned of default values) -->
-                        <div class="lg:col-span-5 bg-gradient-to-br from-surface-container-low/90 to-pink-50/70 rounded-3xl p-6 sm:p-7 border border-primary/15 shadow-[0_8px_30px_rgba(255,51,102,0.08)] hover:shadow-[0_14px_35px_rgba(255,51,102,0.18)] hover:-translate-y-1 transition-all duration-300">
-                            <div class="flex items-center justify-between mb-4">
+                        <div class="lg:col-span-5 bg-gradient-to-br from-surface-container-low/90 to-pink-50/70 rounded-2xl sm:rounded-3xl p-4 sm:p-7 border border-primary/15 shadow-[0_8px_30px_rgba(255,51,102,0.08)] hover:shadow-[0_14px_35px_rgba(255,51,102,0.18)] transition-all duration-300">
+                            <div class="flex items-center justify-between mb-3 sm:mb-4">
                                 <div class="flex items-center gap-2">
-                                    <span class="text-2xl animate-bounce" style="animation-duration: 2.5s;">💖</span>
-                                    <label class="font-headline font-black text-lg text-on-surface" for="name1">Your Romantic Identity</label>
+                                    <span class="text-xl sm:text-2xl animate-bounce" style="animation-duration: 2.5s;">💖</span>
+                                    <label class="font-headline font-black text-base sm:text-lg text-on-surface" for="name1">Your Romantic Identity</label>
                                 </div>
-                                <span class="text-xs font-black px-3.5 py-1 bg-gradient-to-r from-pink-100 to-rose-200 text-primary border border-primary/25 rounded-full shadow-xs">Sweetheart 1</span>
+                                <span class="text-[10px] sm:text-xs font-black px-2.5 sm:px-3.5 py-0.5 sm:py-1 bg-gradient-to-r from-pink-100 to-rose-200 text-primary border border-primary/25 rounded-full shadow-xs whitespace-nowrap">Sweetheart 1</span>
                             </div>
                             <div class="space-y-4">
                                 <div>
@@ -210,28 +215,30 @@
                         </div>
 
                         <!-- Pulsing Intertwined Heart Connector -->
-                        <div class="lg:col-span-1 flex flex-col items-center justify-center my-3 lg:my-0">
+                        <div class="lg:col-span-1 flex flex-row lg:flex-col items-center justify-center my-1 lg:my-0 gap-3 lg:gap-0">
+                            <div class="hidden lg:block w-full h-px bg-gradient-to-r from-transparent via-pink-200 to-transparent mb-3"></div>
                             <div class="relative cursor-pointer group" onclick="triggerMagicPulse()">
                                 <div class="absolute inset-0 rounded-full bg-primary/30 animate-ping scale-150 pointer-events-none"></div>
-                                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-tr from-primary via-rose-500 to-secondary flex flex-col items-center justify-center shadow-[0_12px_35px_rgba(255,51,102,0.5)] animate-heartPulse group-hover:scale-110 transition-transform">
-                                    <span class="material-symbols-outlined text-white text-3xl sm:text-4xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                                <div class="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-gradient-to-tr from-primary via-rose-500 to-secondary flex flex-col items-center justify-center shadow-[0_12px_35px_rgba(255,51,102,0.5)] animate-heartPulse group-hover:scale-110 transition-transform">
+                                    <span class="material-symbols-outlined text-white text-2xl sm:text-4xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
                                 </div>
                                 <div class="absolute -bottom-2 inset-x-0 flex justify-center">
-                                    <span class="px-2.5 py-0.5 rounded-full bg-white text-primary border border-primary/25 text-[10px] font-black tracking-widest uppercase shadow-md">
+                                    <span class="px-2 py-0.5 rounded-full bg-white text-primary border border-primary/25 text-[9px] sm:text-[10px] font-black tracking-widest uppercase shadow-md whitespace-nowrap">
                                         MATCH
                                     </span>
                                 </div>
                             </div>
+                            <div class="hidden lg:block w-full h-px bg-gradient-to-r from-transparent via-pink-200 to-transparent mt-3"></div>
                         </div>
 
                         <!-- Crush Card -->
-                        <div class="lg:col-span-5 bg-gradient-to-br from-surface-container-low/90 to-rose-50/70 rounded-3xl p-6 sm:p-7 border border-primary/15 shadow-[0_8px_30px_rgba(255,51,102,0.08)] hover:shadow-[0_14px_35px_rgba(255,51,102,0.18)] hover:-translate-y-1 transition-all duration-300">
-                            <div class="flex items-center justify-between mb-4">
+                        <div class="lg:col-span-5 bg-gradient-to-br from-surface-container-low/90 to-rose-50/70 rounded-2xl sm:rounded-3xl p-4 sm:p-7 border border-primary/15 shadow-[0_8px_30px_rgba(255,51,102,0.08)] hover:shadow-[0_14px_35px_rgba(255,51,102,0.18)] transition-all duration-300">
+                            <div class="flex items-center justify-between mb-3 sm:mb-4">
                                 <div class="flex items-center gap-2">
-                                    <span class="text-2xl animate-bounce" style="animation-duration: 2.2s;">💌</span>
-                                    <label class="font-headline font-black text-lg text-on-surface" for="name2">Your Secret Valentine</label>
+                                    <span class="text-xl sm:text-2xl animate-bounce" style="animation-duration: 2.2s;">💌</span>
+                                    <label class="font-headline font-black text-base sm:text-lg text-on-surface" for="name2">Your Secret Valentine</label>
                                 </div>
-                                <span class="text-xs font-black px-3.5 py-1 bg-gradient-to-r from-rose-100 to-pink-200 text-tertiary border border-tertiary/25 rounded-full shadow-xs">Crush Target</span>
+                                <span class="text-[10px] sm:text-xs font-black px-2.5 sm:px-3.5 py-0.5 sm:py-1 bg-gradient-to-r from-rose-100 to-pink-200 text-tertiary border border-tertiary/25 rounded-full shadow-xs whitespace-nowrap">Crush 💘</span>
                             </div>
                             <div class="space-y-4">
                                 <div>
@@ -258,15 +265,15 @@
                     </div>
 
                     <!-- Big Glowing Valentine CTA -->
-                    <div class="mt-10 text-center relative" id="ctaContainer">
-                        <button class="group relative inline-flex items-center justify-center gap-3 px-12 py-5 rounded-full bg-gradient-to-r from-primary via-rose-500 to-secondary text-white font-headline text-lg sm:text-xl font-black shadow-[0_12px_40px_rgba(255,51,102,0.5)] hover:shadow-[0_16px_50px_rgba(255,51,102,0.7)] hover:scale-105 active:scale-95 transition-all duration-300" id="calculateBtn" type="submit">
-                            <span class="text-2xl group-hover:scale-125 transition-transform">✨</span>
+                    <div class="mt-6 sm:mt-10 text-center relative" id="ctaContainer">
+                        <button class="group relative w-full sm:w-auto inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-12 py-4 sm:py-5 rounded-full bg-gradient-to-r from-primary via-rose-500 to-secondary text-white font-headline text-base sm:text-xl font-black shadow-[0_12px_40px_rgba(255,51,102,0.5)] hover:shadow-[0_16px_50px_rgba(255,51,102,0.7)] hover:scale-105 active:scale-95 transition-all duration-300" id="calculateBtn" type="submit">
+                            <span class="text-xl sm:text-2xl group-hover:scale-125 transition-transform">✨</span>
                             <span>Reveal Our Cosmic Romance</span>
-                            <span class="material-symbols-outlined text-2xl group-hover:rotate-45 transition-transform" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                            <span class="material-symbols-outlined text-xl sm:text-2xl group-hover:rotate-45 transition-transform" style="font-variation-settings: 'FILL' 1;">favorite</span>
                         </button>
-                        <div class="mt-3 flex items-center justify-center gap-2 text-xs font-semibold text-on-surface-variant">
+                        <div class="mt-2 sm:mt-3 flex flex-wrap items-center justify-center gap-1 sm:gap-2 text-[10px] sm:text-xs font-semibold text-on-surface-variant">
                             <span>💘 Sealed by Cupid</span>
-                            <span>•</span>
+                            <span class="hidden sm:inline">•</span>
                             <span>100% Sweet Playground Nostalgia</span>
                         </div>
                     </div>
@@ -275,11 +282,11 @@
         </div>
 
         <!-- INSTANT ROMANTIC RESULT SHOWCASE -->
-        <div class="relative bg-white rounded-[2.5rem] p-6 sm:p-10 shadow-[0_22px_55px_rgba(255,51,102,0.16)] border border-pink-200 overflow-hidden mb-12 transition-all duration-500 hidden" id="resultCard">
+        <div class="relative bg-white rounded-[1.8rem] sm:rounded-[2.5rem] p-4 sm:p-10 shadow-[0_12px_40px_rgba(255,51,102,0.14)] sm:shadow-[0_22px_55px_rgba(255,51,102,0.16)] border border-pink-200 overflow-hidden mb-8 sm:mb-12 transition-all duration-500 hidden" id="resultCard">
             <div class="absolute -top-12 -right-12 w-48 h-48 bg-gradient-to-bl from-pink-200/60 to-purple-200/20 rounded-full blur-2xl pointer-events-none"></div>
 
             <!-- Top Result Header -->
-            <div class="flex flex-col sm:flex-row items-center justify-between pb-6 border-b border-pink-100 gap-4">
+            <div class="flex flex-col sm:flex-row items-center sm:justify-between pb-4 sm:pb-6 border-b border-pink-100 gap-3 sm:gap-4">
                 <div>
                     <div class="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-gradient-to-r from-pink-100 to-rose-200 text-primary text-xs font-black tracking-wider uppercase mb-1 shadow-xs">
                         <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
@@ -303,15 +310,15 @@
             </div>
 
             <!-- Main Verdict Card -->
-            <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <div class="mt-4 sm:mt-6 grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 items-start">
                 <!-- Love Fortune & Spark Gauge -->
-                <div class="lg:col-span-8 bg-gradient-to-br from-[#fff0f5] via-[#ffe4ec] to-[#ffdbe7] rounded-3xl p-6 sm:p-8 border border-pink-200 relative overflow-hidden shadow-inner">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                <div class="lg:col-span-8 bg-gradient-to-br from-[#fff0f5] via-[#ffe4ec] to-[#ffdbe7] rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-pink-200 relative overflow-hidden shadow-inner">
+                    <div class="flex flex-row items-start justify-between gap-3 sm:gap-4 mb-3 sm:mb-4">
                         <div>
                             <span class="inline-flex items-center gap-1 px-3.5 py-0.5 rounded-full bg-white/95 text-primary text-xs font-black uppercase tracking-wider mb-2 shadow-xs">
                                 <span>💌 Sweet Love Fortune</span>
                             </span>
-                            <h3 class="text-3xl sm:text-4xl font-headline font-black text-on-surface" id="resultTitle">
+                            <h3 class="text-xl sm:text-4xl font-headline font-black text-on-surface leading-tight" id="resultTitle">
                                 L — LOVERS <span class="text-primary text-2xl font-bold">(97% Match 🔥)</span>
                             </h3>
                         </div>
@@ -329,7 +336,7 @@
                         </div>
                     </div>
 
-                    <p class="text-on-surface font-medium text-base sm:text-lg leading-relaxed" id="resultCommentary">
+                    <p class="text-on-surface font-medium text-sm sm:text-lg leading-relaxed" id="resultCommentary">
                         Your compatibility score has been computed by Cupid's mathematical bow!
                     </p>
 
@@ -340,7 +347,7 @@
                 </div>
 
                 <!-- Quick Interactive Buttons with Refined Actions -->
-                <div class="lg:col-span-4 flex flex-col gap-3">
+                <div class="lg:col-span-4 flex flex-col gap-2 sm:gap-3">
                     <button class="w-full py-4 px-5 rounded-full bg-gradient-to-r from-primary via-rose-500 to-tertiary text-white font-headline font-bold text-sm flex items-center justify-center gap-2 shadow-[0_6px_22px_rgba(255,51,102,0.35)] hover:scale-102 hover:shadow-[0_8px_26px_rgba(255,51,102,0.45)] transition-all active:scale-95" onclick="shareWebsiteLink()" type="button">
                         <span class="text-lg">🔗</span>
                         <span>Share FLAMES Matcher</span>
@@ -370,10 +377,28 @@
     </main>
 
     <!-- Sweet Floating Toast Notification -->
-    <div class="fixed bottom-6 right-6 z-50 transform translate-y-28 opacity-0 transition-all duration-300 pointer-events-none" id="toast">
-        <div class="bg-white text-on-surface px-6 py-3.5 rounded-full shadow-[0_12px_35px_rgba(255,51,102,0.3)] border border-pink-200 flex items-center gap-3 text-sm font-bold">
-            <span class="text-xl" id="toastIcon">💖</span>
+    <div class="fixed bottom-4 sm:bottom-6 left-3 right-3 sm:left-auto sm:right-6 sm:max-w-xs z-50 transform translate-y-28 opacity-0 transition-all duration-300 pointer-events-none" id="toast" style="bottom: max(1rem, env(safe-area-inset-bottom));">
+        <div class="bg-white text-on-surface px-4 sm:px-6 py-3 sm:py-3.5 rounded-full shadow-[0_12px_35px_rgba(255,51,102,0.3)] border border-pink-200 flex items-center gap-2 sm:gap-3 text-sm font-bold">
+            <span class="text-lg sm:text-xl" id="toastIcon">💖</span>
             <span id="toastMessage">Result processed! 💌</span>
+        </div>
+    </div>
+
+    <!-- Music Autoplay Unlock Overlay (auto-dismissed on tap/click) -->
+    <div id="musicUnlockOverlay" class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/20 backdrop-blur-sm transition-all duration-500" onclick="unlockAndPlayMusic()" style="cursor: pointer;">
+        <div class="relative flex flex-col items-center gap-4 px-8 py-8 rounded-3xl bg-white/95 shadow-[0_20px_60px_rgba(255,51,102,0.35)] border border-pink-200 max-w-xs mx-4 text-center" onclick="event.stopPropagation(); unlockAndPlayMusic()">
+            <!-- Pulsing Heart -->
+            <div class="relative w-20 h-20 rounded-full bg-gradient-to-tr from-primary via-rose-500 to-secondary flex items-center justify-center shadow-[0_8px_30px_rgba(255,51,102,0.5)]" style="animation: heartPulse 1.4s ease-in-out infinite;">
+                <span class="text-4xl select-none">💘</span>
+            </div>
+            <div>
+                <p class="font-headline font-black text-xl text-on-surface mb-1">FLAMES Crush Lab</p>
+                <p class="text-sm text-on-surface-variant font-medium">Tap anywhere to start your romantic experience ✨</p>
+            </div>
+            <button class="w-full py-3 px-6 rounded-full bg-gradient-to-r from-primary via-rose-500 to-secondary text-white font-headline font-black text-sm shadow-[0_8px_25px_rgba(255,51,102,0.4)] active:scale-95 transition-all">
+                🎵 Start with Love Music
+            </button>
+            <p class="text-[10px] text-on-surface-variant">(Required to enable ambient romantic melody)</p>
         </div>
     </div>
 
@@ -381,8 +406,8 @@
     <canvas class="hidden" id="storyCanvas" height="1920" width="1080"></canvas>
 
     <!-- Footer -->
-    <footer class="w-full bg-white/80 border-t border-pink-100 py-10 mt-10">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+    <footer class="w-full bg-white/80 border-t border-pink-100 py-6 sm:py-10 mt-4 sm:mt-10" style="padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-center sm:text-left">
             <div class="flex items-center gap-2 text-primary font-headline font-black text-sm">
                 <span>💘 FLAMES Crush Lab</span>
                 <span class="text-xs font-semibold text-on-surface-variant">• Valentine’s Day Special Edition</span>
@@ -520,22 +545,72 @@
         }
         const sfx = new SoundFX();
 
-        let isMusicPlaying = true; // Enabled by default
+        let isMusicPlaying = true; // Music ON by default
+        let musicUnlocked = false;
 
-        function startMusicIfEnabled() {
-            if (isMusicPlaying && !sfx.melodyTimer) {
-                sfx.init();
-                sfx.startRomanticTune();
+        // Attempt true autoplay using AudioContext unlock
+        function tryAutoplay() {
+            sfx.init();
+            if (!sfx.ctx) return;
+
+            if (sfx.ctx.state === 'running') {
+                // AudioContext is active — start music immediately!
+                if (isMusicPlaying && !sfx.melodyTimer) {
+                    sfx.startRomanticTune();
+                    musicUnlocked = true;
+                    dismissMusicOverlay();
+                }
+            } else if (sfx.ctx.state === 'suspended') {
+                // Try to resume — works in some browsers without interaction
+                sfx.ctx.resume().then(() => {
+                    if (sfx.ctx.state === 'running' && isMusicPlaying && !sfx.melodyTimer) {
+                        sfx.startRomanticTune();
+                        musicUnlocked = true;
+                        dismissMusicOverlay();
+                    }
+                }).catch(() => {
+                    // Blocked by browser — overlay stays, awaiting user tap
+                });
             }
         }
 
-        // Auto-start music on page load & first user interaction (bypasses browser autoplay blocks)
-        window.addEventListener('DOMContentLoaded', () => {
-            startMusicIfEnabled();
-        });
-        ['click', 'touchstart', 'keydown', 'pointerdown'].forEach(evt => {
-            window.addEventListener(evt, () => startMusicIfEnabled(), { once: true });
-        });
+        function dismissMusicOverlay() {
+            const overlay = document.getElementById('musicUnlockOverlay');
+            if (overlay) {
+                overlay.style.opacity = '0';
+                overlay.style.pointerEvents = 'none';
+                setTimeout(() => overlay.remove(), 500);
+            }
+        }
+
+        window.unlockAndPlayMusic = function () {
+            if (musicUnlocked) { dismissMusicOverlay(); return; }
+            sfx.init();
+            if (sfx.ctx && sfx.ctx.state === 'suspended') {
+                sfx.ctx.resume().then(() => {
+                    if (isMusicPlaying && !sfx.melodyTimer) sfx.startRomanticTune();
+                    musicUnlocked = true;
+                    dismissMusicOverlay();
+                });
+            } else {
+                if (isMusicPlaying && !sfx.melodyTimer) sfx.startRomanticTune();
+                musicUnlocked = true;
+                dismissMusicOverlay();
+            }
+        };
+
+        // Try autoplay as soon as DOM is ready
+        document.addEventListener('DOMContentLoaded', tryAutoplay);
+        // Also retry after a short delay (some browsers need a moment)
+        setTimeout(tryAutoplay, 300);
+
+        // Fallback: if user interacts with page before tapping overlay, start music then
+        const interactionEvents = ['click', 'touchstart', 'scroll', 'keydown', 'pointerdown'];
+        function onFirstInteraction() {
+            interactionEvents.forEach(e => window.removeEventListener(e, onFirstInteraction));
+            if (!musicUnlocked) window.unlockAndPlayMusic();
+        }
+        interactionEvents.forEach(e => window.addEventListener(e, onFirstInteraction, { once: true, passive: true }));
 
         window.toggleRomanticMusic = function () {
             const text = document.getElementById('musicStatusText');
