@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/api/log",
+      "dest": "/api/log.js"
+    },
+    {
+      "src": "/api/crushes",
+      "dest": "/api/crushes.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
