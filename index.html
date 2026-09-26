@@ -551,15 +551,19 @@
         // 3. DYNAMIC OUTCOME-SPECIFIC ICON RAIN ON REVEAL
         // -------------------------------------------------------------
         function triggerOutcomeRain(iconList) {
-            for (let i = 0; i < 35; i++) {
+            if (!iconList || !iconList.length) {
+                iconList = ['💘', '💖', '💕', '🎯', '🌹', '✨'];
+            }
+            for (let i = 0; i < 45; i++) {
                 const span = document.createElement('span');
                 span.className = 'outcome-rain-item';
                 span.textContent = iconList[Math.floor(Math.random() * iconList.length)];
-                span.style.left = `${Math.random() * 90 + 5}%`;
-                span.style.fontSize = `${Math.random() * 22 + 24}px`;
-                span.style.animationDelay = `${Math.random() * 1.5}s`;
+                span.style.left = `${Math.random() * 92 + 4}%`;
+                span.style.fontSize = `${Math.random() * 24 + 28}px`;
+                span.style.animationDelay = `${Math.random() * 1.8}s`;
+                span.style.animationDuration = `${Math.random() * 1.5 + 3.5}s`;
                 document.body.appendChild(span);
-                setTimeout(() => span.remove(), 5500);
+                setTimeout(() => span.remove(), 6000);
             }
         }
 
