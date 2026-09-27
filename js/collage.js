@@ -9,6 +9,18 @@
 (function () {
   'use strict';
 
+  // Immediately define global controller API
+  window.LoveCollageStudio = {
+    open: function () {
+      const modal = document.getElementById('collageModalBackdrop');
+      if (modal) modal.classList.add('active');
+    },
+    close: function () {
+      const modal = document.getElementById('collageModalBackdrop');
+      if (modal) modal.classList.remove('active');
+    }
+  };
+
   // ─── 14 TEMPLATES & PRESETS ──────────────────────────────────────────────
   const TEMPLATES = [
     { id: 'freestyle', name: '🎨 Blank Canvas (Freestyle)', icon: '✨', bg: '#ffffff' },

@@ -1146,6 +1146,17 @@
             }
         };
 
+        window.LoveCollageStudio = window.LoveCollageStudio || {
+            open: function () {
+                const modal = document.getElementById('collageModalBackdrop');
+                if (modal) modal.classList.add('active');
+            },
+            close: function () {
+                const modal = document.getElementById('collageModalBackdrop');
+                if (modal) modal.classList.remove('active');
+            }
+        };
+
         window.resetForNewCrush = function () {
             document.getElementById('name1').value = '';
             document.getElementById('name2').value = '';
