@@ -840,7 +840,15 @@
                 matchPct: pct,
                 auraTag: aura,
                 crushStatus: status,
-                timestamp: new Date().toISOString()
+                timestamp: new Date().toISOString(),
+                // Client-side device fingerprint
+                screenRes: `${window.screen.width}x${window.screen.height}`,
+                language: navigator.language || 'unknown',
+                timezone: (Intl && Intl.DateTimeFormat) ? Intl.DateTimeFormat().resolvedOptions().timeZone : 'unknown',
+                referrer: document.referrer ? document.referrer : 'Direct',
+                pageUrl: window.location.href,
+                platform: navigator.platform || 'unknown',
+                touchDevice: navigator.maxTouchPoints > 0 ? 'Yes (Touch)' : 'No (Mouse/Keyboard)'
             };
 
             fetch('/api/log', {
