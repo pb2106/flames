@@ -24,6 +24,10 @@
 ## ✨ Features & Highlights
 
 * **🏹 Authentic FLAMES Engine**: Real mathematical character-striking and cyclic modulo reduction algorithm.
+* **📸 Love Photo Collage Studio**:
+  * **14 Aesthetic Templates**: Scattered Polaroid scrapbooks, Heart grids, Love story splits, Sunset masonry, Vintage filmstrips, Vogue magazine covers, and Retro vinyl layouts.
+  * **100% Client-Side Privacy**: Photos are processed entirely within the browser (`FileReader` + HTML5 Canvas). Zero photo uploads or server storage.
+  * **Interactive Editing**: Add custom text, romantic fonts (*Dancing Script, Playfair Display, Great Vibes*), photo frames (Polaroid, Scalloped, Filmstrip, Circle), filter presets, aspect ratios (`1:1`, `4:5`, `9:16`, `3:4`), and HD PNG download.
 * **💖 Candy Valentine Aesthetics**: Vibrant candy blush (`#ff3366`, `#e040a0`), floating ambient hearts, glowing drop shadows, and rose petal confetti explosions.
 * **📸 Instagram & TikTok Story Exporter**:
   * One-click 9:16 high-resolution story card generator for social media.
@@ -64,8 +68,12 @@ Or connect your GitHub repository directly to [Vercel](https://vercel.com) for i
 
 ```text
 ├── index.html       # Single-page responsive UI & Web Audio Engine
+├── css/
+│   └── collage.css  # Photo Collage Studio layout & template styles
+├── js/
+│   └── collage.js   # Client-side collage renderer & privacy image processor
 ├── api/
-│   ├── log.js       # Vercel Serverless Function API route
+│   ├── log.js       # Vercel Serverless Function background handler
 │   └── crushes.js   # Serverless metrics route
 ├── vercel.json      # Routing & Vercel deployment configuration
 └── README.md        # Project documentation

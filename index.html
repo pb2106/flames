@@ -12,6 +12,8 @@
     <meta name="description" content="Test your name chemistry with your crush on FLAMES! Get your cosmic percentage, romantic fortune, and secret Valentine verdict.">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/collage.css">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
         tailwind.config = {
@@ -141,6 +143,9 @@
                 <a class="px-4 py-2 rounded-full text-sm font-semibold text-on-surface-variant hover:text-primary hover:bg-white/90 transition-all flex items-center gap-1" href="#resultCard" onclick="document.getElementById('resultCard').scrollIntoView({behavior:'smooth'});">
                     <span>💌 Result</span>
                 </a>
+                <button class="px-4 py-2 rounded-full text-sm font-bold text-rose-600 hover:text-white hover:bg-gradient-to-r hover:from-primary hover:to-rose-500 transition-all flex items-center gap-1.5 shadow-xs" onclick="LoveCollageStudio.open()">
+                    <span>📸 Collage Studio</span>
+                </button>
             </nav>
 
             <!-- Music & Mood Actions -->
@@ -150,6 +155,9 @@
                     <span class="material-symbols-outlined text-primary text-base leading-none" id="musicIcon">music_note</span>
                     <span class="hidden sm:inline" id="musicStatusText">Love Melody 🎵</span>
                     <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-primary animate-ping" id="musicPing"></span>
+                </button>
+                <button class="px-3 py-1.5 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 text-white text-xs font-bold shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1" onclick="LoveCollageStudio.open()" title="Open Love Photo Collage Studio">
+                    <span>📸 Collage</span>
                 </button>
                 <button class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-primary via-rose-500 to-tertiary flex items-center justify-center text-white shadow-[0_4px_16px_rgba(255,51,102,0.4)] hover:scale-110 active:scale-95 transition-transform" onclick="triggerMagicPulse()" title="Heartbeat">
                     <span class="material-symbols-outlined text-lg sm:text-xl">volunteer_activism</span>
@@ -351,6 +359,11 @@
                     <button class="w-full py-4 px-5 rounded-full bg-gradient-to-r from-primary via-rose-500 to-tertiary text-white font-headline font-bold text-sm flex items-center justify-center gap-2 shadow-[0_6px_22px_rgba(255,51,102,0.35)] hover:scale-102 hover:shadow-[0_8px_26px_rgba(255,51,102,0.45)] transition-all active:scale-95" onclick="shareWebsiteLink()" type="button">
                         <span class="text-lg">🔗</span>
                         <span>Share FLAMES Matcher</span>
+                    </button>
+
+                    <button class="w-full py-3.5 px-5 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-rose-500 text-white font-headline font-bold text-sm flex items-center justify-center gap-2 shadow-md hover:scale-102 transition-all active:scale-95" onclick="LoveCollageStudio.open()" type="button">
+                        <span class="text-lg">✨</span>
+                        <span>Create Photo Collage 📸</span>
                     </button>
                     
                     <!-- Save Story Card with Privacy Censor Checkbox -->
@@ -1142,6 +1155,174 @@
             showToast('✨ Cleared! Type another crush to test Cupid\'s bow!', '🏹');
         };
     </script>
+
+    <!-- ========================================================================== -->
+    <!-- LOVE PHOTO COLLAGE STUDIO MODAL                                           -->
+    <!-- ========================================================================== -->
+        <div class="collage-modal-backdrop" id="collageModalBackdrop">
+        <div class="collage-modal-window">
+            <!-- Modal Header -->
+            <div class="collage-header">
+                <div class="collage-title">
+                    <span class="text-2xl">📸</span>
+                    <span>Love Photo Collage Studio</span>
+                </div>
+                <div class="collage-header-actions">
+                    <button class="btn-collage-action btn-collage-secondary" id="btnAddPhotoBtn">
+                        <i class="fas fa-image"></i> Add Photo
+                    </button>
+                    <input type="file" id="collagePhotoInput" accept="image/*" multiple style="display:none">
+                    
+                    <button class="btn-collage-action btn-collage-secondary" id="btnAddTextBtn">
+                        <i class="fas fa-font"></i> Add Text
+                    </button>
+                    <button class="btn-collage-action btn-collage-primary" id="btnDownloadCollage">
+                        <i class="fas fa-download"></i> Download HD
+                    </button>
+                    <button class="btn-collage-close" onclick="LoveCollageStudio.close()" title="Close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modal Main Body -->
+            <div class="collage-body">
+                <!-- Sidebar with Navigation Tabs -->
+                <div class="collage-sidebar">
+                    <div class="sidebar-tabs">
+                        <button class="tab-btn active" data-tab="templates"><i class="fas fa-th-large"></i> Templates</button>
+                        <button class="tab-btn" data-tab="frames"><i class="fas fa-border-all"></i> Frames</button>
+                        <button class="tab-btn" data-tab="text"><i class="fas fa-font"></i> Text</button>
+                        <button class="tab-btn" data-tab="emojis"><i class="fas fa-smile"></i> Emojis</button>
+                        <button class="tab-btn" data-tab="layers"><i class="fas fa-layer-group"></i> Layers</button>
+                    </div>
+
+                    <div class="tab-content-container">
+                        <!-- Panel: Templates -->
+                        <div class="tab-panel active" id="panel-templates">
+                            <div class="template-grid" id="collageTemplateGrid">
+                                <!-- Populated by collage.js -->
+                            </div>
+                        </div>
+
+                        <!-- Panel: Frames & Borders -->
+                        <div class="tab-panel" id="panel-frames">
+                            <div class="control-group">
+                                <label class="control-label">Preset Photo Frame</label>
+                                <select class="control-select" id="collageFrameSelect">
+                                    <option value="none">Normal (Clean)</option>
+                                    <option value="polaroid">Polaroid Photo Card</option>
+                                    <option value="scalloped">Scalloped Rounded Edge</option>
+                                    <option value="circle">Circular Mask</option>
+                                    <option value="filmstrip">Filmstrip Sprocket Holes</option>
+                                    <option value="gold">Gold Metallic Frame</option>
+                                </select>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Border Width</label>
+                                <input type="range" id="collageBorderWidth" min="0" max="20" value="0" class="control-slider">
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Border Color</label>
+                                <input type="color" id="collageBorderColor" value="#ffffff" class="w-10 h-10 rounded-full border-0 cursor-pointer">
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Corner Radius</label>
+                                <input type="range" id="collageBorderRadius" min="0" max="50" value="8" class="control-slider">
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Filter Preset</label>
+                                <select class="control-select" id="collageFilterSelect">
+                                    <option value="none">Normal</option>
+                                    <option value="sepia(0.25) contrast(1.05) saturate(1.2)">Warm Sunset</option>
+                                    <option value="hue-rotate(-20deg) saturate(1.3)">Soft Rose</option>
+                                    <option value="grayscale(1) contrast(1.1)">B&amp;W Romance</option>
+                                    <option value="sepia(0.85)">Vintage Sepia</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Panel: Text & Typography -->
+                        <div class="tab-panel" id="panel-text">
+                            <div class="control-group">
+                                <label class="control-label">Edit Selected Text</label>
+                                <textarea class="control-input-text" id="collageTextInput" rows="2" placeholder="Type romantic text or quote..."></textarea>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Font Style</label>
+                                <select class="control-select" id="collageFontSelect">
+                                    <option value="Dancing Script">Dancing Script (Handwriting)</option>
+                                    <option value="Playfair Display">Playfair Display (Serif)</option>
+                                    <option value="Great Vibes">Great Vibes (Romantic Script)</option>
+                                    <option value="Pacifico">Pacifico (Fun Cursive)</option>
+                                    <option value="Montserrat">Montserrat (Bold Modern)</option>
+                                    <option value="Outfit">Outfit (Clean Sans)</option>
+                                    <option value="Cinzel">Cinzel (Classic Vintage)</option>
+                                    <option value="Bebas Neue">Bebas Neue (Impact Capsule)</option>
+                                    <option value="Caveat">Caveat (Playful Note)</option>
+                                </select>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Text Color</label>
+                                <input type="color" id="collageTextColor" value="#e11d48" class="w-10 h-10 rounded-full border-0 cursor-pointer">
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Font Size</label>
+                                <input type="range" id="collageTextSize" min="12" max="72" value="28" class="control-slider">
+                            </div>
+                        </div>
+
+                        <!-- Panel: Emojis & Stickers -->
+                        <div class="tab-panel" id="panel-emojis">
+                            <div class="sidebar-section-title"><i class="fas fa-heart"></i> Add Love Stickers</div>
+                            <div class="emoji-grid" id="collageEmojiGrid">
+                                <!-- Populated by collage.js -->
+                            </div>
+                        </div>
+
+                        <!-- Panel: Layer Depth -->
+                        <div class="tab-panel" id="panel-layers">
+                            <div class="sidebar-section-title"><i class="fas fa-layer-group"></i> Layer Order</div>
+                            <div class="layer-toolbar">
+                                <button class="btn-layer-action" id="btnBringForward"><i class="fas fa-arrow-up"></i> Bring Forward</button>
+                                <button class="btn-layer-action" id="btnSendBackward"><i class="fas fa-arrow-down"></i> Send Backward</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="privacy-badge m-3">
+                        <i class="fas fa-shield-alt"></i>
+                        <span><strong>100% Client Privacy:</strong> Photos processed in-memory. Zero server uploads!</span>
+                    </div>
+                </div>
+
+                <!-- Center Stage: Aspect Ratio Toolbar & Real Interactive Canvas -->
+                <div class="collage-canvas-stage">
+                    <div class="toolbar-aspect">
+                        <span class="text-xs text-slate-400 font-semibold mr-1">Aspect:</span>
+                        <button class="aspect-btn active" data-aspect="1/1">1:1 Square</button>
+                        <button class="aspect-btn" data-aspect="4/5">4:5 Insta</button>
+                        <button class="aspect-btn" data-aspect="9/16">9:16 Story</button>
+                        <button class="aspect-btn" data-aspect="3/4">3:4 Portrait</button>
+                    </div>
+
+                    <div class="collage-canvas-box" id="collageCanvasBox">
+                        <!-- Interactive Canvas Layers rendered here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="js/collage.js"></script>
+
 </body>
 
 </html>

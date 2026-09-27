@@ -1,0 +1,508 @@
+/* ==========================================================================
+   LOVE PHOTO COLLAGE STUDIO - ADVANCED INTERACTIVE CANVAS & MOBILE EDITOR
+   ========================================================================== */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Montserrat:wght@400;600;800&family=Outfit:wght@400;600;700&family=Pacifico&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Cinzel:wght@600;700&family=Bebas+Neue&family=Caveat:wght@600;700&display=swap');
+
+/* Modal Backdrop */
+.collage-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 5, 15, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.collage-modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Main Editor Window */
+.collage-modal-window {
+  background: linear-gradient(135deg, #180924 0%, #0d0414 100%);
+  border: 1px solid rgba(244, 114, 182, 0.3);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 50px rgba(236, 72, 153, 0.25);
+  border-radius: 1.25rem;
+  width: 100%;
+  max-width: 1450px;
+  height: 94vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+}
+
+/* Top Navigation Header */
+.collage-header {
+  padding: 0.75rem 1.25rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.collage-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  background: linear-gradient(135deg, #f472b6, #ec4899, #fb7185);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.collage-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Action Buttons */
+.btn-collage-action {
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.825rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn-collage-primary {
+  background: linear-gradient(135deg, #ec4899, #f43f5e);
+  color: white;
+  box-shadow: 0 4px 14px rgba(236, 72, 153, 0.4);
+}
+
+.btn-collage-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(236, 72, 153, 0.6);
+}
+
+.btn-collage-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f3e8ff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-collage-secondary:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.btn-collage-close {
+  background: rgba(255, 255, 255, 0.08);
+  color: #9ca3af;
+  border: none;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-collage-close:hover {
+  background: rgba(239, 68, 68, 0.25);
+  color: #fca5a5;
+}
+
+/* Mobile & Desktop Main Body Grid */
+.collage-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  overflow: hidden;
+  height: calc(100% - 60px);
+}
+
+@media (max-width: 900px) {
+  .collage-body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+  }
+}
+
+/* Sidebar Navigation Tabs for Mobile & Desktop */
+.collage-sidebar {
+  background: rgba(15, 7, 20, 0.7);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sidebar-tabs {
+  display: flex;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.sidebar-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-btn {
+  flex: 1;
+  min-width: 65px;
+  padding: 0.65rem 0.4rem;
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  font-size: 0.725rem;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.tab-btn i {
+  font-size: 1rem;
+}
+
+.tab-btn.active {
+  color: #ec4899;
+  background: rgba(236, 72, 153, 0.12);
+  border-bottom: 2px solid #ec4899;
+}
+
+/* Sidebar Tab Content Panels */
+.tab-content-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tab-panel {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tab-panel.active {
+  display: flex;
+}
+
+/* Template Cards Grid */
+.template-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem;
+}
+
+.template-card {
+  aspect-ratio: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.template-card:hover, .template-card.active {
+  border-color: #ec4899;
+  background: rgba(236, 72, 153, 0.18);
+  box-shadow: 0 0 12px rgba(236, 72, 153, 0.3);
+}
+
+.template-card-icon {
+  font-size: 1.5rem;
+}
+
+.template-card-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #e5e7eb;
+  text-align: center;
+}
+
+/* Center Stage Canvas Preview */
+.collage-canvas-stage {
+  flex: 1;
+  background: radial-gradient(circle at center, #210d2d 0%, #0a030d 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  position: relative;
+  overflow: auto;
+  user-select: none;
+  touch-action: none;
+}
+
+/* Aspect Toolbar */
+.toolbar-aspect {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0.3rem 0.6rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 0.75rem;
+}
+
+.aspect-btn {
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  font-size: 0.725rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.aspect-btn.active, .aspect-btn:hover {
+  background: #ec4899;
+  color: white;
+}
+
+/* MAIN INTERACTIVE CANVAS BOARD */
+.collage-canvas-box {
+  width: 460px;
+  max-width: 95vw;
+  max-height: 70vh;
+  aspect-ratio: 1;
+  background: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+  transition: aspect-ratio 0.3s ease;
+}
+
+/* Layer Elements (Photos, Text, Emojis, Stickers) */
+.canvas-element {
+  position: absolute;
+  cursor: move;
+  user-select: none;
+  touch-action: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.canvas-element.selected {
+  outline: 2px dashed #ec4899;
+  outline-offset: 2px;
+}
+
+/* Transform Handles for Selected Layer */
+.element-controls {
+  position: absolute;
+  inset: -8px;
+  pointer-events: none;
+  display: none;
+}
+
+.canvas-element.selected .element-controls {
+  display: block;
+}
+
+.control-handle {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  background: #ec4899;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  pointer-events: auto;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  transition: transform 0.15s ease;
+}
+
+.control-handle:hover {
+  transform: scale(1.2);
+}
+
+.handle-delete {
+  top: -10px;
+  right: -10px;
+  background: #ef4444;
+}
+
+.handle-resize {
+  bottom: -10px;
+  right: -10px;
+  cursor: nwse-resize;
+  background: #ec4899;
+}
+
+.handle-rotate {
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #8b5cf6;
+}
+
+/* Image Elements & Frame Styles */
+.element-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Preset Borders & Frames */
+.frame-border-polaroid {
+  background: #ffffff !important;
+  padding: 10px 10px 36px 10px !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2) !important;
+  border-radius: 4px !important;
+}
+
+.frame-border-scalloped {
+  border-radius: 1.25rem !important;
+  box-shadow: 0 8px 24px rgba(236,72,153,0.25) !important;
+}
+
+.frame-border-circle {
+  border-radius: 9999px !important;
+}
+
+.frame-border-filmstrip {
+  border-left: 14px solid #111 !important;
+  border-right: 14px solid #111 !important;
+}
+
+.frame-border-gold {
+  border: 4px solid #f59e0b !important;
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.4) !important;
+}
+
+/* Emoji / Sticker Selector Grid */
+.emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+}
+
+.emoji-item {
+  font-size: 1.6rem;
+  padding: 0.4rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.emoji-item:hover {
+  transform: scale(1.25);
+  background: rgba(236, 72, 153, 0.2);
+}
+
+/* Control Widgets & Form Fields */
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.control-label {
+  font-size: 0.75rem;
+  color: #cbd5e1;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.control-input-text,
+.control-select {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.5rem;
+  padding: 0.45rem 0.65rem;
+  color: white;
+  font-size: 0.825rem;
+  outline: none;
+}
+
+.control-input-text:focus,
+.control-select:focus {
+  border-color: #ec4899;
+}
+
+.control-slider {
+  width: 100%;
+  accent-color: #ec4899;
+}
+
+/* Layer Order Controls Toolbar */
+.layer-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.btn-layer-action {
+  flex: 1;
+  padding: 0.4rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.4rem;
+  color: #cbd5e1;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  transition: background 0.15s;
+}
+
+.btn-layer-action:hover {
+  background: #ec4899;
+  color: white;
+}
